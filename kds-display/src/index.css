@@ -1,0 +1,87 @@
+@import 'bulma/css/bulma.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  --kds-bg: #1A1C23;
+  --kds-column: #252836;
+  --kds-card: #1F1D2B;
+  --kds-text: #FFFFFF;
+  --kds-accent: #10B981; /* Mint */
+}
+
+body {
+  background-color: var(--kds-bg);
+  color: var(--kds-text);
+  font-family: 'Inter', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.kds-header {
+  background-color: var(--kds-column);
+  color: var(--kds-accent);
+  padding: 1rem;
+  border-bottom: 2px solid var(--kds-accent);
+}
+
+.kanban-board {
+  display: flex;
+  height: calc(100vh - 60px);
+  padding: 1rem;
+  gap: 1.5rem;
+}
+
+.kanban-column {
+  flex: 1;
+  background-color: var(--kds-column);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-header {
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.kanban-body {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.ticket-card {
+  background-color: var(--kds-card);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.ticket-card:hover {
+  border-color: var(--kds-accent);
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.ticket-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  cursor: pointer;
+}
+.ticket-item.done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

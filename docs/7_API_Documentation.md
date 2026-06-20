@@ -1,0 +1,9 @@
+# API Documentation
+- `POST /api/auth/login`
+- `GET /api/products`
+- `POST /api/products`
+- `GET /api/tables`
+- `PATCH /api/tables/:id/status`
+- `POST /api/orders`
+- `GET /api/orders`
+- `POST /api/payments/upi`

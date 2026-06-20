@@ -1,0 +1,13 @@
+# Database Schema (MySQL)
+**Tables:**
+- `users` (id, name, email, password, role_id)
+- `roles` (id, name)
+- `products` (id, name, price, tax, category_id, status)
+- `categories` (id, name, color)
+- `floors` (id, name)
+- `tables` (id, table_number, seats, status, floor_id, qr_token)
+- `customers` (id, name, email, phone)
+- `orders` (id, status, subtotal, tax, discount, total, table_id, customer_id, coupon_id)
+- `order_items` (id, order_id, product_id, quantity, price)
+- `payments` (id, order_id, amount, method, status)
+- `coupons` (id, code, type, value, status)

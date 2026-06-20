@@ -1,0 +1,76 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #FF8A00;
+  --secondary: #FFB347;
+  --success: #10B981;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --dark: #0F172A;
+  --bg: #F8FAFC;
+  --cards: #FFFFFF;
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--dark);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(15, 23, 42, 0.1);
+}
+
+/* Custom Buttons */
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  border-radius: 16px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  padding: 8px 24px;
+}
+.btn-primary:hover {
+  background-color: #E67A00;
+  border-color: #E67A00;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--dark);
+  color: white;
+  min-height: 100vh;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.sidebar .nav-link {
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-heading);
+  border-radius: 12px;
+  margin: 4px 12px;
+  transition: all 0.2s ease;
+}
+.sidebar .nav-link:hover, .sidebar .nav-link.active {
+  color: white;
+  background-color: rgba(255,255,255,0.1);
+}
