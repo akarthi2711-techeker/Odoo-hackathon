@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-import { Coffee, Search, Plus, Minus, User, CreditCard } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Coffee, Search, Plus, Minus, User, CreditCard, Loader } from 'lucide-react';
 import './index.css';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const App = () => {
   const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
   const categories = [
     { id: 1, name: 'Coffee', color: '#8B4513' },
@@ -11,11 +16,21 @@ const App = () => {
     { id: 3, name: 'Cold Drinks', color: '#4682B4' }
   ];
 
-  const products = [
-    { id: 1, name: 'Espresso', price: 3.50, catId: 1 },
-    { id: 2, name: 'Latte', price: 4.50, catId: 1 },
-    { id: 3, name: 'Croissant', price: 3.00, catId: 2 }
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${API_URL}/products`);
+        if (!response.ok) throw new Error('Failed to fetch products');
+        const json = await response.json();
+        setProducts(json.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <div className="flex h-screen font-body overflow-hidden">
@@ -40,18 +55,28 @@ const App = () => {
           <input type="text" placeholder="Search products..." className="w-full pl-12 pr-4 py-3 rounded-xl border-none shadow-sm focus:ring-2 focus:ring-primary" />
         </div>
         
-        <div className="grid grid-cols-2 gap-4">
-          {products.map(p => (
-            <div key={p.id} className="glass-card rounded-2xl p-4 cursor-pointer hover:shadow-md transition-shadow relative overflow-hidden group">
-              <div className="absolute left-0 top-0 bottom-0 w-2 bg-orange-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div className="h-32 bg-gray-200 rounded-xl mb-3 flex items-center justify-center text-gray-400">
-                Image
+        {loading ? (
+          <div className="flex justify-center items-center h-64 text-gray-400">
+             <Loader className="animate-spin mr-2" /> Fetching products from AWS...
+          </div>
+        ) : error ? (
+           <div className="text-red-500 text-center">{error}</div>
+        ) : products.length === 0 ? (
+          <div className="text-gray-400 text-center">No products found in the database.</div>
+        ) : (
+          <div className="grid grid-cols-2 gap-4">
+            {products.map(p => (
+              <div key={p.id} className="glass-card rounded-2xl p-4 cursor-pointer hover:shadow-md transition-shadow relative overflow-hidden group">
+                <div className="absolute left-0 top-0 bottom-0 w-2 bg-orange-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="h-32 bg-gray-200 rounded-xl mb-3 flex items-center justify-center text-gray-400">
+                  Image
+                </div>
+                <h3 className="font-heading font-semibold">{p.name}</h3>
+                <p className="text-primary font-bold mt-1">${parseFloat(p.price).toFixed(2)}</p>
               </div>
-              <h3 className="font-heading font-semibold">{p.name}</h3>
-              <p className="text-primary font-bold mt-1">${p.price.toFixed(2)}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* 35% Right - Cart & Payment */}
